@@ -7,6 +7,7 @@ import { Check, Palette, Type, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { FontClass,  useFontStore } from "@/hooks/use-font"
 
 type FontOption = {
   name: string
@@ -47,20 +48,20 @@ export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme()
   const [open, setOpen] = useState(false)
   const [activeTab, setActiveTab] = useState<"colors" | "fonts">("colors")
-  const [selectedFont, setSelectedFont] = useState<string>("font-inter")
+  const {setFont, selectedFont} = useFontStore()
   const [mounted, setMounted] = useState(false)
 
   // When mounted on client, load the saved font preference
   useEffect(() => {
     setMounted(true)
     const savedFont = localStorage.getItem("selectedFont") || "font-inter"
-    setSelectedFont(savedFont)
+    setFont(savedFont as FontClass)
     document.documentElement.className = savedFont
   }, [])
 
   // Handle font change
-  const handleFontChange = (font: string) => {
-    setSelectedFont(font)
+  const handleFontChange = (font: FontClass) => {
+    setFont(font)
     document.documentElement.className = font
     localStorage.setItem("selectedFont", font)
   }
@@ -98,9 +99,9 @@ export function ThemeSwitcher() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.2 }}
-            className="fixed right-4 bottom-16 z-50 w-72 rounded-lg border bg-background shadow-lg"
+            className="fixed right-4 bottom-16 z-50 w-72 h-[calc(100vh-80px)] overflow-y-auto rounded-lg border bg-background shadow-lg"
           >
-            <div className="flex items-center justify-between border-b p-3">
+            <div className="flex items-center sticky top-0 justify-between border-b p-3 bg-background"> 
               <div className="flex items-center gap-2">
                 <Palette className="h-5 w-5" />
                 <h3 className="font-medium">Appearance</h3>
@@ -212,7 +213,7 @@ export function ThemeSwitcher() {
                             selectedFont === option.value ? "bg-primary text-primary-foreground" : "hover:bg-muted",
                             option.className,
                           )}
-                          onClick={() => handleFontChange(option.value)}
+                          onClick={() => handleFontChange(option.value as FontClass)}
                         >
                           <span>{option.name}</span>
                           {selectedFont === option.value && <Check className="h-4 w-4" />}

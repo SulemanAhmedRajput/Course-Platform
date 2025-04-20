@@ -83,8 +83,8 @@ export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialo
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md p-0 overflow-hidden">
-        <AnimatePresence mode="wait">
+<DialogContent className="sm:max-w-md p-0 max-h-[calc(100vh-40px)] overflow-auto scrollbar-hide">
+<AnimatePresence mode="wait">
           {view === "login" && (
             <motion.div
               key="login"

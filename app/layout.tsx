@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/components/auth/auth-provider"
 import { ThemeSwitcher } from "@/components/theme-switcher"
 import { Inter, Roboto, Open_Sans, Poppins, Montserrat, Playfair_Display } from "next/font/google"
+import { getSelectedFontServer, getSelectedThemeServer } from "@/actions/theme-action"
 
 
 
@@ -23,18 +24,36 @@ const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
 
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+  
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`font-inter ${inter.variable} ${roboto.variable} ${openSans.variable} ${poppins.variable} ${montserrat.variable} ${playfair.variable}`}
-
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+       <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          themes={[
+            "light",
+            "dark",
+            "blue",
+            "green",
+            "red",
+            "purple",
+            "orange",
+            "yellow",
+            "pink",
+            "gray",
+          ]}
+        >
           <AuthProvider>{children}</AuthProvider>
           <ThemeSwitcher />
         </ThemeProvider>

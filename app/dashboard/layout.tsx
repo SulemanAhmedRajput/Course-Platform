@@ -67,7 +67,7 @@ export default function DashboardLayout({
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard")}>
+                    <SidebarMenuButton tooltip={"Overview"} asChild isActive={isActive("/dashboard")}>
                       <Link href="/dashboard">
                         <LayoutDashboard />
                         <span>Overview</span>
@@ -76,7 +76,7 @@ export default function DashboardLayout({
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/my-courses")}>
+                    <SidebarMenuButton tooltip={"My Courses"} asChild isActive={isActive("/dashboard/my-courses")}>
                       <Link href="/dashboard/my-courses">
                         <BookOpen />
                         <span>My Courses</span>
@@ -85,7 +85,7 @@ export default function DashboardLayout({
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/analytics")}>
+                    <SidebarMenuButton tooltip={"Analytics"} asChild isActive={isActive("/dashboard/analytics")}>
                       <Link href="/dashboard/analytics">
                         <BarChart3 />
                         <span>Analytics</span>
@@ -94,7 +94,7 @@ export default function DashboardLayout({
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/certificates")}>
+                    <SidebarMenuButton tooltip={"Certificates"} asChild isActive={isActive("/dashboard/certificates")}>
                       <Link href="/dashboard/certificates">
                         <Certificate />
                         <span>Certificates</span>
@@ -112,7 +112,7 @@ export default function DashboardLayout({
                 <SidebarGroupContent>
                   <SidebarMenu>
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/create-course")}>
+                      <SidebarMenuButton tooltip={"Create Case"}  asChild isActive={isActive("/dashboard/create-course")}>
                         <Link href="/dashboard/create-course">
                           <Library />
                           <span>Create Course</span>
@@ -121,7 +121,7 @@ export default function DashboardLayout({
                     </SidebarMenuItem>
 
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/manage-courses")}>
+                      <SidebarMenuButton tooltip={"Manage Courses"} asChild isActive={isActive("/dashboard/manage-courses")}>
                         <Link href="/dashboard/manage-courses">
                           <FileText />
                           <span>Manage Courses</span>
@@ -130,7 +130,7 @@ export default function DashboardLayout({
                     </SidebarMenuItem>
 
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/students")}>
+                      <SidebarMenuButton tooltip={"Students"} asChild isActive={isActive("/dashboard/students")}>
                         <Link href="/dashboard/students">
                           <Users />
                           <span>Students</span>
@@ -139,7 +139,7 @@ export default function DashboardLayout({
                     </SidebarMenuItem>
 
                     <SidebarMenuItem>
-                      <SidebarMenuButton asChild isActive={isActive("/dashboard/earnings")}>
+                      <SidebarMenuButton tooltip={"Earnings"} asChild isActive={isActive("/dashboard/earnings")}>
                         <Link href="/dashboard/earnings">
                           <CreditCard />
                           <span>Earnings</span>
@@ -156,7 +156,7 @@ export default function DashboardLayout({
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/profile")}>
+                    <SidebarMenuButton tooltip={"Profile"} asChild isActive={isActive("/dashboard/profile")}>
                       <Link href="/dashboard/profile">
                         <Users />
                         <span>Profile</span>
@@ -165,7 +165,7 @@ export default function DashboardLayout({
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/notifications")}>
+                    <SidebarMenuButton tooltip={"Notifications"} asChild isActive={isActive("/dashboard/notifications")}>
                       <Link href="/dashboard/notifications">
                         <Bell />
                         <span>Notifications</span>
@@ -175,7 +175,7 @@ export default function DashboardLayout({
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/messages")}>
+                    <SidebarMenuButton tooltip={"Messages"} asChild isActive={isActive("/dashboard/messages")}>
                       <Link href="/dashboard/messages">
                         <MessageSquare />
                         <span>Messages</span>
@@ -184,7 +184,7 @@ export default function DashboardLayout({
                   </SidebarMenuItem>
 
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild isActive={isActive("/dashboard/wishlist")}>
+                    <SidebarMenuButton tooltip={"Wishlist"} asChild isActive={isActive("/dashboard/wishlist")}>
                       <Link href="/dashboard/wishlist">
                         <Heart />
                         <span>Wishlist</span>
@@ -199,7 +199,7 @@ export default function DashboardLayout({
           <SidebarFooter>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/dashboard/settings")}>
+                <SidebarMenuButton tooltip={"Settings"} asChild isActive={isActive("/dashboard/settings")}>
                   <Link href="/dashboard/settings">
                     <Settings />
                     <span>Settings</span>
