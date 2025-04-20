@@ -13,7 +13,7 @@ export function ThemeProvider({
   const {selectedFont, setFont} = useFontStore()
   return (
     <NextThemesProvider themes={themes} {...props}>
-     <div className={cn("font-sans", selectedFont)}>
+     <div className={cn("font-sans", `${selectedFont}`)}>
 
      {children}
      </div>

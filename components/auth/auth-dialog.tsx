@@ -12,6 +12,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Mail, Lock, User, Eye, EyeOff, Github, Loader2, CheckCircle2 } from "lucide-react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
+import { cn } from "@/lib/utils"
+import { useFontStore } from "@/hooks/use-font"
 
 interface AuthDialogProps {
   isOpen: boolean
@@ -20,6 +22,7 @@ interface AuthDialogProps {
 }
 
 export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialogProps) {
+  const {selectedFont} = useFontStore()
   const [view, setView] = useState<"login" | "register" | "forgot-password">(initialView)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -83,7 +86,8 @@ export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialo
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md p-0 max-h-[calc(100vh-40px)] overflow-auto scrollbar-hide">
+      
+      <DialogContent className={cn("sm:max-w-md  p-0 max-h-[calc(100vh-40px)] overflow-auto scrollbar-hide", selectedFont)}>
         <AnimatePresence mode="wait">
           {view === "login" && (
             <motion.div
