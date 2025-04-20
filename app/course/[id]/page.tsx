@@ -1,14 +1,14 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { CheckCircle2, Clock, FileText, Globe, PlayCircle, Star, Users } from "lucide-react"
-import Link from "next/link"
-import { AuthButton } from "@/components/auth/auth-button"
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { CheckCircle2, Clock, FileText, Globe, PlayCircle, Star, Users } from "lucide-react";
+import Link from "next/link";
+import { AuthButton } from "@/components/auth/auth-button";
 
 export default function CoursePage({ params }: { params: { id: string } }) {
   // Dummy course data
@@ -138,7 +138,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
           "I've taken several web development courses, and this is by far the best one. The instructor is knowledgeable and engaging, and the course covers everything you need to know to become a full-stack developer.",
       },
     ],
-  }
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -213,8 +213,8 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                       <div className="text-sm text-muted-foreground">{course.discount}</div>
                     </div>
                     <div className="space-y-3">
-                      <AuthButton 
-                        className="w-full" 
+                      <AuthButton
+                        className="w-full"
                         size="lg"
                         authView="login"
                         authenticatedText="Enroll Now"
@@ -256,7 +256,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
-
         {/* Course Content */}
         <div className="container py-8">
           <Tabs defaultValue="overview" className="space-y-8">
@@ -286,13 +285,11 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                 Reviews
               </TabsTrigger>
             </TabsList>
-
             <TabsContent value="overview" className="space-y-8">
               <div>
                 <h2 className="text-2xl font-bold mb-4">About This Course</h2>
                 <p className="text-muted-foreground">{course.longDescription}</p>
               </div>
-
               <div>
                 <h2 className="text-2xl font-bold mb-4">What You'll Learn</h2>
                 <div className="grid gap-2 sm:grid-cols-2">
@@ -304,7 +301,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                   ))}
                 </div>
               </div>
-
               <div>
                 <h2 className="text-2xl font-bold mb-4">Requirements</h2>
                 <ul className="list-disc pl-5 space-y-2">
@@ -314,7 +310,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                 </ul>
               </div>
             </TabsContent>
-
             <TabsContent value="curriculum" className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold">Course Content</h2>
@@ -322,7 +317,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                   {course.sections.length} sections • {course.lectures} lectures • {course.duration} total length
                 </div>
               </div>
-
               <Accordion type="single" collapsible className="w-full">
                 {course.sections.map((section) => (
                   <AccordionItem key={section.id} value={`section-${section.id}`}>
@@ -359,7 +353,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                 ))}
               </Accordion>
             </TabsContent>
-
             <TabsContent value="instructor" className="space-y-6">
               <div className="flex items-start space-x-4">
                 <Avatar className="h-16 w-16">
@@ -371,7 +364,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                   <p className="text-muted-foreground">{course.instructor.bio}</p>
                 </div>
               </div>
-
               <div className="grid gap-4 sm:grid-cols-2">
                 <Card>
                   <CardHeader>
@@ -392,7 +384,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                     </div>
                   </CardContent>
                 </Card>
-
                 <Card>
                   <CardHeader>
                     <CardTitle>Other Courses by {course.instructor.name}</CardTitle>
@@ -411,17 +402,15 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                 </Card>
               </div>
             </TabsContent>
-
             <TabsContent value="reviews" className="space-y-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold">Student Reviews</h2>
-                <AuthButton 
+                <AuthButton
                   authView="login"
                   authenticatedText="Write a Review"
                   unauthenticatedText="Login to Review"
                 />
               </div>
-
               <div className="grid gap-6 md:grid-cols-2">
                 <Card>
                   <CardHeader>
@@ -448,7 +437,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                     </div>
                   </CardContent>
                 </Card>
-
                 <Card>
                   <CardHeader>
                     <CardTitle>Review Summary</CardTitle>
@@ -480,11 +468,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                           ))}
                         </div>
                       </div>
-                      <div className="flex justify-between  />
-                          ))}
-                        </div>
-                      </div>
-                      <div className="flex justify-between text-sm">\
+                      <div className="flex justify-between text-sm">
                         <span>Value for money</span>
                         <div className="flex">
                           {[1, 2, 3, 4, 5].map((star) => (
@@ -499,7 +483,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                   </CardContent>
                 </Card>
               </div>
-
               <div className="space-y-4">
                 {course.reviews.map((review) => (
                   <Card key={review.id}>
@@ -537,7 +520,6 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                   </Card>
                 ))}
               </div>
-
               <div className="flex justify-center">
                 <Button variant="outline">Load More Reviews</Button>
               </div>
@@ -547,5 +529,5 @@ export default function CoursePage({ params }: { params: { id: string } }) {
       </main>
       <SiteFooter />
     </div>
-  )
+  );
 }
