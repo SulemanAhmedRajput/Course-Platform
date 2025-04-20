@@ -99,7 +99,7 @@ export function ThemeSwitcher() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.2 }}
-            className="fixed right-4 bottom-16 z-50 w-72 h-[calc(100vh-80px)] overflow-y-auto rounded-lg border bg-background shadow-lg"
+            className="fixed right-4 bottom-16  scrollbar-hide z-50 w-72 h-[calc(100vh-80px)] overflow-y-auto rounded-lg border bg-background shadow-lg"
           >
             <div className="flex items-center sticky top-0 justify-between border-b p-3 bg-background"> 
               <div className="flex items-center gap-2">
