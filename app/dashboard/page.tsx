@@ -1,6 +1,24 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { BarChart, BookOpen, GraduationCap, Users, TrendingUp, DollarSign } from "lucide-react"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+import {
+  BarChart,
+  BookOpen,
+  GraduationCap,
+  Users,
+  TrendingUp,
+  DollarSign,
+} from "lucide-react"
 
 export default function DashboardPage() {
   return (
@@ -58,6 +76,7 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
           </div>
+
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
             <Card className="col-span-4">
               <CardHeader>
@@ -73,6 +92,7 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
             </Card>
+
             <Card className="col-span-3">
               <CardHeader>
                 <CardTitle>Recent Students</CardTitle>
@@ -82,7 +102,7 @@ export default function DashboardPage() {
                 <div className="space-y-4">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <div key={i} className="flex items-center gap-4">
-                      <div className="h-10 w-10 rounded-full bg-muted"></div>
+                      <div className="h-10 w-10 rounded-full bg-muted" />
                       <div className="flex-1">
                         <p className="text-sm font-medium">Student Name {i}</p>
                         <p className="text-xs text-muted-foreground">Enrolled in Web Development</p>
@@ -94,6 +114,7 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
           </div>
+
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardHeader>
@@ -109,13 +130,14 @@ export default function DashboardPage() {
                       </div>
                       <div className="flex-1">
                         <p className="text-sm font-medium">Web Development Bootcamp {i}</p>
-                        <p className="text-xs text-muted-foreground">{120 - (i * 20)} students enrolled</p>
+                        <p className="text-xs text-muted-foreground">{120 - i * 20} students enrolled</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
+
             <Card>
               <CardHeader>
                 <CardTitle>Recent Reviews</CardTitle>
@@ -133,6 +155,15 @@ export default function DashboardPage() {
                           ))}
                         </div>
                       </div>
-                      <p className="text-xs
-
-\
+                      <p className="text-xs text-muted-foreground">Great course! Learned a lot.</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}

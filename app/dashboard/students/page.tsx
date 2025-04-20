@@ -1,12 +1,28 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
 import { Search } from "lucide-react"
 
 export default function StudentsPage() {
-  // Dummy data for students
   const students = [
     {
       id: 1,
@@ -92,11 +108,36 @@ export default function StudentsPage() {
     },
   ]
 
+  const renderStudentRow = (student: (typeof students)[0]) => (
+    <div
+      key={student.id}
+      className="flex items-center justify-between border-b py-2 px-4 hover:bg-muted rounded-md transition"
+    >
+      <div className="flex items-center gap-4">
+        <img
+          src={student.avatar}
+          alt={student.name}
+          className="h-10 w-10 rounded-full"
+        />
+        <div>
+          <p className="font-medium">{student.name}</p>
+          <p className="text-sm text-muted-foreground">{student.email}</p>
+        </div>
+      </div>
+      <div className="text-right text-sm">
+        <p>Courses: {student.enrolledCourses}</p>
+        <p className="text-muted-foreground">Last Active: {student.lastActive}</p>
+      </div>
+    </div>
+  )
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Students</h1>
-        <p className="text-muted-foreground">Manage and track your students' progress</p>
+        <p className="text-muted-foreground">
+          Manage and track your students' progress
+        </p>
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
@@ -143,10 +184,12 @@ export default function StudentsPage() {
                 <CardDescription>Total: {students.length} students</CardDescription>
               </div>
             </CardHeader>
-            <CardContent>
-              {/* Student list content will go here */}
+            <CardContent className="space-y-2">
+              {students.map(renderStudentRow)}
             </CardContent>
           </Card>
         </TabsContent>
-
-\
+      </Tabs>
+    </div>
+  )
+}

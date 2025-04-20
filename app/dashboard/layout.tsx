@@ -45,18 +45,13 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
-
-  const isActive = (path: string) => {
-    return pathname === path
-  }
-
-  // Determine if user is instructor or student (for demo purposes)
-  const userRole = "instructor" // or "student"
+  const isActive = (path: string) => pathname === path
+  const userRole = "instructor" // Replace with dynamic value later
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen">
-        <Sidebar>
+      <div className="flex h-screen w-full overflow-hidden">
+        <Sidebar collapsible="icon">
           <SidebarHeader>
             <div className="flex items-center gap-2 px-2">
               <Link href="/" className="flex items-center gap-2 font-bold">
@@ -65,6 +60,7 @@ export default function DashboardLayout({
               </Link>
             </div>
           </SidebarHeader>
+
           <SidebarContent>
             <SidebarGroup>
               <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
@@ -78,6 +74,7 @@ export default function DashboardLayout({
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/my-courses")}>
                       <Link href="/dashboard/my-courses">
@@ -86,6 +83,7 @@ export default function DashboardLayout({
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/analytics")}>
                       <Link href="/dashboard/analytics">
@@ -94,6 +92,7 @@ export default function DashboardLayout({
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/certificates")}>
                       <Link href="/dashboard/certificates">
@@ -120,6 +119,7 @@ export default function DashboardLayout({
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
+
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/manage-courses")}>
                         <Link href="/dashboard/manage-courses">
@@ -128,6 +128,7 @@ export default function DashboardLayout({
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
+
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/students")}>
                         <Link href="/dashboard/students">
@@ -136,6 +137,7 @@ export default function DashboardLayout({
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
+
                     <SidebarMenuItem>
                       <SidebarMenuButton asChild isActive={isActive("/dashboard/earnings")}>
                         <Link href="/dashboard/earnings">
@@ -161,6 +163,7 @@ export default function DashboardLayout({
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/notifications")}>
                       <Link href="/dashboard/notifications">
@@ -170,6 +173,7 @@ export default function DashboardLayout({
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/messages")}>
                       <Link href="/dashboard/messages">
@@ -178,6 +182,7 @@ export default function DashboardLayout({
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
+
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild isActive={isActive("/dashboard/wishlist")}>
                       <Link href="/dashboard/wishlist">
@@ -190,6 +195,7 @@ export default function DashboardLayout({
               </SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
+
           <SidebarFooter>
             <SidebarMenu>
               <SidebarMenuItem>
@@ -200,10 +206,11 @@ export default function DashboardLayout({
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+
               <SidebarMenuItem>
                 <div className="flex items-center gap-2 p-2">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
+                    <AvatarImage src="/placeholder.svg" alt="User" />
                     <AvatarFallback>JD</AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col">
@@ -218,7 +225,8 @@ export default function DashboardLayout({
             </SidebarMenu>
           </SidebarFooter>
         </Sidebar>
-        <div className="flex-1">
+
+        <div className="flex flex-1 flex-col overflow-hidden">
           <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6">
             <SidebarTrigger />
             <div className="ml-auto flex items-center gap-4">
@@ -227,7 +235,10 @@ export default function DashboardLayout({
               </Button>
             </div>
           </header>
-          <main className="flex-1 p-6">{children}</main>
+
+          <main className="flex-1 overflow-auto p-6 bg-background">
+            {children}
+          </main>
         </div>
       </div>
     </SidebarProvider>
