@@ -83,8 +83,8 @@ export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialo
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-<DialogContent className="sm:max-w-md p-0 max-h-[calc(100vh-40px)] overflow-auto scrollbar-hide">
-<AnimatePresence mode="wait">
+      <DialogContent className="sm:max-w-md p-0 max-h-[calc(100vh-40px)] overflow-auto scrollbar-hide">
+        <AnimatePresence mode="wait">
           {view === "login" && (
             <motion.div
               key="login"
@@ -215,7 +215,7 @@ export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialo
 
                 <div className="text-center text-sm">
                   Don&apos;t have an account?{" "}
-                  <Button variant="link" className="p-0 h-auto" onClick={() => setView("register")}>
+                  <Button variant="link" type="button" className="p-0 h-auto" onClick={() => setView("register")}>
                     Sign up
                   </Button>
                 </div>
@@ -417,7 +417,7 @@ export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialo
 
                 <div className="text-center text-sm">
                   Already have an account?{" "}
-                  <Button variant="link" className="p-0 h-auto" onClick={() => setView("login")}>
+                  <Button variant="link" type="button" className="p-0 h-auto" onClick={() => setView("login")}>
                     Login
                   </Button>
                 </div>
