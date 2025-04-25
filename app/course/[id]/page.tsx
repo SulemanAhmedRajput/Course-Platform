@@ -197,7 +197,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
               </div>
               <div>
                 <Card className="overflow-hidden">
-                  <div className="aspect-video w-full overflow-hidden">
+                  <div className="aspect-video bg-[red] w-full overflow-hidden">
                     <img
                       src={course.image || "/placeholder.svg"}
                       alt={course.title}
@@ -228,18 +228,18 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                     <div className="mt-4 space-y-2">
                       <div className="flex justify-between text-sm">
                         <span>Full lifetime access</span>
-                        <CheckCircle2 className="h-4 w-4 text-primary" />
+                        <CheckCircle2 className="shrink-0 h-4 w-4 text-primary" />
                       </div>
                       <div className="flex justify-between text-sm">
                         <span>Access on mobile and TV</span>
-                        <CheckCircle2 className="h-4 w-4 text-primary" />
+                        <CheckCircle2 className="shrink-0 h-4 w-4 text-primary" />
                       </div>
                       <div className="flex justify-between text-sm">
                         <span>Certificate of completion</span>
-                        <CheckCircle2 className="h-4 w-4 text-primary" />
+                        <CheckCircle2 className="shrink-0 h-4 w-4 text-primary" />
                       </div>
                     </div>
-                    <div className="mt-4 flex justify-center space-x-4">
+                    <div className="mt-4 flex flex-wrap overflow-auto justify-center space-x-4">
                       <Button variant="ghost" size="sm">
                         Share
                       </Button>
@@ -259,7 +259,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
         {/* Course Content */}
         <div className="container py-8">
           <Tabs defaultValue="overview" className="space-y-8">
-            <TabsList className="w-full justify-start border-b rounded-none h-auto p-0 bg-transparent">
+            <TabsList className="w-full overflow-y-auto justify-start border-b rounded-none h-auto p-0 bg-transparent">
               <TabsTrigger
                 value="overview"
                 className="rounded-none data-[state=active]:border-b-2 data-[state=active]:border-primary bg-transparent px-4 py-2"
@@ -295,7 +295,7 @@ export default function CoursePage({ params }: { params: { id: string } }) {
                 <div className="grid gap-2 sm:grid-cols-2">
                   {course.whatYouWillLearn.map((item, index) => (
                     <div key={index} className="flex items-start space-x-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
+                      <CheckCircle2 className="shrink-0 h-5 w-5 text-primary mt-0.5" />
                       <span>{item}</span>
                     </div>
                   ))}

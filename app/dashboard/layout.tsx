@@ -49,9 +49,10 @@ export default function DashboardLayout({
   const userRole = "instructor" // Replace with dynamic value later
 
   return (
-    <SidebarProvider>
-      <div className="flex h-screen w-full overflow-hidden">
-        <Sidebar collapsible="icon">
+    <div className="flex h-screen w-full overflow-hidden">
+
+      <SidebarProvider>
+        <Sidebar  collapsible="icon">
           <SidebarHeader>
             <div className="flex items-center gap-2 px-2">
               <Link href="/" className="flex items-center gap-2 font-bold">
@@ -61,7 +62,7 @@ export default function DashboardLayout({
             </div>
           </SidebarHeader>
 
-          <SidebarContent>
+          <SidebarContent className="scrollbar-hide overflow-auto group-data-[collapsible=icon]:overflow-auto" >
             <SidebarGroup>
               <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
               <SidebarGroupContent>
@@ -112,7 +113,7 @@ export default function DashboardLayout({
                 <SidebarGroupContent>
                   <SidebarMenu>
                     <SidebarMenuItem>
-                      <SidebarMenuButton tooltip={"Create Case"}  asChild isActive={isActive("/dashboard/create-course")}>
+                      <SidebarMenuButton tooltip={"Create Case"} asChild isActive={isActive("/dashboard/create-course")}>
                         <Link href="/dashboard/create-course">
                           <Library />
                           <span>Create Course</span>
@@ -208,17 +209,19 @@ export default function DashboardLayout({
               </SidebarMenuItem>
 
               <SidebarMenuItem>
-                <div className="flex items-center gap-2 p-2">
-                  <Avatar className="h-8 w-8">
+                <div className="flex items-center justify-between gap-2 p-2">
+                <div className="flex gap-4">
+                <Avatar className="h-8 w-8 group-data-[collapsible=icon]:w-6 group-data-[collapsible=icon]:h-6 transition-opacity duration-100">
                     <AvatarImage src="/placeholder.svg" alt="User" />
                     <AvatarFallback>JD</AvatarFallback>
                   </Avatar>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-medium">John Doe</span>
-                    <span className="text-xs text-muted-foreground">
+                  <div className="flex group-data-[collapsible=icon]:hidden flex-col ">
+                    <span className="text-sm font-medium whitespace-nowrap">John Doe</span>
+                    <span className="text-xs group-data-[collapsible=icon]:hidden text-muted-foreground">
                       {userRole === "instructor" ? "Instructor" : "Student"}
                     </span>
                   </div>
+                </div>
                   <ModeToggle />
                 </div>
               </SidebarMenuItem>
@@ -240,7 +243,8 @@ export default function DashboardLayout({
             {children}
           </main>
         </div>
-      </div>
-    </SidebarProvider>
+      </SidebarProvider>
+    </div>
+
   )
 }

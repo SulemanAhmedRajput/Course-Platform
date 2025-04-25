@@ -32,7 +32,7 @@ export default async function RootLayout({
 
   
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning >
       <body
         className={`font-inter ${inter.variable} ${roboto.variable} ${openSans.variable} ${poppins.variable} ${montserrat.variable} ${playfair.variable}`}
       >
