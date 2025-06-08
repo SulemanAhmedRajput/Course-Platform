@@ -17,7 +17,13 @@ export const useLoginMutation = () => {
     },
     onSuccess: async (data) => {
       console.log(data);
-      await saveAdminSession(data?.data?.token || {}).then(res => console.log(res))
+      await saveAdminSession({
+        accessToken: data?.data?.token?.accessToken || "",
+        refreshToken: data?.data?.token?.refreshToken || "",
+        email: data?.data?.user?.email || "",
+        role: data?.data?.user?.role || "",
+        name: data?.data?.user?.name || "",
+      });
     },
   });
 };

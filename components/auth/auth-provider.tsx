@@ -1,17 +1,25 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, type ReactNode, useEffect } from "react"
 import { AuthDialog } from "@/components/auth/auth-dialog"
+import { destroyAdminSession } from "@/actions/save-token"
+import Cookies from 'js-cookie'
 
 type AuthView = "login" | "register" | "forgot-password"
 
+interface UserSessionData {
+  email: string;
+  role: string;
+  name: string;
+}
+
 interface AuthContextType {
   isAuthenticated: boolean
-  user: any | null
+  user: UserSessionData | null
   openAuthDialog: (view?: AuthView) => void
   closeAuthDialog: () => void
-  login: (email: string, password: string) => Promise<void>
-  register: (userData: any) => Promise<void>
+  login: (userData: UserSessionData) => void
+  register: (userData: UserSessionData) => void
   logout: () => void
 }
 
@@ -19,9 +27,27 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [user, setUser] = useState<any | null>(null)
+  const [user, setUser] = useState<UserSessionData | null>(null)
   const [isAuthDialogOpen, setIsAuthDialogOpen] = useState(false)
   const [authDialogView, setAuthDialogView] = useState<AuthView>("login")
+
+  useEffect(() => {
+    const userEmail = Cookies.get('userEmail')
+    const userRole = Cookies.get('userRole')
+    const userName = Cookies.get('userName')
+
+    if (userEmail && userRole && userName) {
+      setIsAuthenticated(true)
+      setUser({
+        email: userEmail,
+        role: userRole,
+        name: userName,
+      })
+    } else {
+      setIsAuthenticated(false)
+      setUser(null)
+    }
+  }, [])
 
   const openAuthDialog = (view: AuthView = "login") => {
     setAuthDialogView(view)
@@ -32,39 +58,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAuthDialogOpen(false)
   }
 
-  const login = async (email: string, password: string) => {
-    // This would be replaced with actual authentication logic
-    console.log("Logging in with", email, password)
-
-    // Simulate successful login
+  const login = (userData: UserSessionData) => {
     setIsAuthenticated(true)
-    setUser({
-      id: "1",
-      name: "John Doe",
-      email,
-      role: "student",
-    })
-
+    setUser(userData)
     closeAuthDialog()
   }
 
-  const register = async (userData: any) => {
-    // This would be replaced with actual registration logic
-    console.log("Registering user", userData)
-
-    // Simulate successful registration and login
+  const register = (userData: UserSessionData) => {
     setIsAuthenticated(true)
-    setUser({
-      id: "1",
-      name: userData.name,
-      email: userData.email,
-      role: userData.accountType,
-    })
-
-    closeAuthDialog()
+    setUser(userData)
+    // For register, we usually want to redirect to login or dashboard, not necessarily close the dialog right away.
+    // The AuthDialog component itself handles the view change to 'login' on successful registration.
+    // So, we don't call closeAuthDialog() here.
   }
 
-  const logout = () => {
+  const logout = async () => {
+    await destroyAdminSession() // Call the server action to destroy cookies
     setIsAuthenticated(false)
     setUser(null)
   }

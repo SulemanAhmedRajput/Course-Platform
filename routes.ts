@@ -18,6 +18,7 @@ export const studentRoutes: string[] = [
 
 export const adminRoutes: string[] = [
   "/admin/dashboard",
+  "/dashboard/categoies/categories"
 ]; 
 
 export const instructorRoutes: string[] = [

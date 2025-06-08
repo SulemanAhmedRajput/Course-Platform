@@ -3,6 +3,7 @@ import { APIS } from "@/lib/API";
 import { RegisterSchema } from "@/schemas/auth-schema";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../axiosInstance";
+import { saveAdminSession } from "@/actions/save-token";
 
 export const useRegisterMutation = () => {
   return useMutation({
@@ -19,6 +20,13 @@ export const useRegisterMutation = () => {
     },
     onSuccess: async (data) => {
       console.log(data);
+      await saveAdminSession({
+        accessToken: data?.data?.token?.accessToken || "",
+        refreshToken: data?.data?.token?.refreshToken || "",
+        email: data?.data?.email || "",
+        role: data?.data?.role || "",
+        name: data?.data?.name || "",
+      });
     }
   });
 };

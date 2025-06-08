@@ -25,6 +25,20 @@ export function SiteHeader() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { isAuthenticated, user, openAuthDialog, logout } = useAuth()
 
+  const getDashboardLink = (role: string | undefined) => {
+    if (!role) return "/"
+    switch (role) {
+      case "admin":
+        return "/admin/dashboard"
+      case "student":
+        return "/student/dashboard"
+      case "instructor":
+        return "/instructor/dashboard"
+      default:
+        return "/"
+    }
+  }
+
   // Check if we're on a course content page
   const isCoursePage = pathname?.startsWith("/course/") && pathname?.includes("/learn")
 
@@ -59,7 +73,7 @@ export function SiteHeader() {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Link href="/dashboard" className="w-full">
+                  <Link href={getDashboardLink(user?.role)} className="w-full">
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
@@ -192,7 +206,7 @@ export function SiteHeader() {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Link href="/dashboard" className="w-full">
+                  <Link href={getDashboardLink(user?.role)} className="w-full">
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
