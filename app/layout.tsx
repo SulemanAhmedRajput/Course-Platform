@@ -1,11 +1,11 @@
-import type React from "react"
-import type { Metadata } from "next"
-import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { AuthProvider } from "@/components/auth/auth-provider"
 import { ThemeSwitcher } from "@/components/theme-switcher"
-import { Inter, Roboto, Open_Sans, Poppins, Montserrat, Playfair_Display } from "next/font/google"
-import { getSelectedFontServer, getSelectedThemeServer } from "@/actions/theme-action"
+import { QueryProvider } from "@/providers/query-provider"
+import type { Metadata } from "next"
+import { Inter, Montserrat, Open_Sans, Playfair_Display, Poppins, Roboto } from "next/font/google"
+import type React from "react"
+import "./globals.css"
+import { AuthProvider } from "@/components/auth/auth-provider"
 
 
 
@@ -30,13 +30,13 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
 
-  
+
   return (
     <html lang="en" suppressHydrationWarning >
       <body
         className={`font-inter ${inter.variable} ${roboto.variable} ${openSans.variable} ${poppins.variable} ${montserrat.variable} ${playfair.variable}`}
       >
-       <ThemeProvider
+        <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -54,7 +54,9 @@ export default async function RootLayout({
             "gray",
           ]}
         >
-          <AuthProvider>{children}</AuthProvider>
+          <QueryProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </QueryProvider>
           <ThemeSwitcher />
         </ThemeProvider>
       </body>
