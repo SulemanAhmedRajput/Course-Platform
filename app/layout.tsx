@@ -6,6 +6,7 @@ import { Inter, Montserrat, Open_Sans, Playfair_Display, Poppins, Roboto } from 
 import type React from "react"
 import "./globals.css"
 import { AuthProvider } from "@/components/auth/auth-provider"
+import { Toaster } from "@/components/ui/toaster"
 
 
 
@@ -56,6 +57,7 @@ export default async function RootLayout({
         >
           <QueryProvider>
             <AuthProvider>{children}</AuthProvider>
+            <Toaster />
           </QueryProvider>
           <ThemeSwitcher />
         </ThemeProvider>

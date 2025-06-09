@@ -18,7 +18,7 @@ export const useCreateCategoryMutation = () => {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["categories"] });
-            toast({ title: "Category created successfully!" });
+            toast({ title: "Success", description: "Category created successfully!" });
         },
         onError: (error: any) => {
             toast({
@@ -43,7 +43,7 @@ export const useUpdateCategoryMutation = () => {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["categories"] });
-            toast({ title: "Category updated successfully!" });
+            toast({ title: "Success", description: "Category updated successfully!" });
         },
         onError: (error: any) => {
             toast({

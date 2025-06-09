@@ -61,6 +61,7 @@ export function CategoryForm({ category, trigger }: CategoryFormProps) {
         <DialogHeader>
           <DialogTitle>{isEditing ? "Edit Category" : "Add New Category"}</DialogTitle>
         </DialogHeader>
+        {JSON.stringify(category, null, 2)}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Category Name</Label>
