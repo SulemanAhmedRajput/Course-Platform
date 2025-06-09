@@ -12,9 +12,12 @@ interface FormInputProps {
   placeholder?: string
   disabled?: boolean
   icon?: React.ElementType;
+  inputMode?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal';
+  pattern?: string;
+  maxLength?: number;
 }
 
-export const FormInput = ({ name, label, type = "text", placeholder, disabled, icon: Icon }: FormInputProps) => {
+export const FormInput = ({ name, label, type = "text", placeholder, disabled, icon: Icon, inputMode, pattern, maxLength }: FormInputProps) => {
   const {
     register,
     formState: { errors },
@@ -39,6 +42,9 @@ export const FormInput = ({ name, label, type = "text", placeholder, disabled, i
               onBlur={field.onBlur}
               disabled={disabled}
               className={Icon ? "pl-10" : ""}
+              inputMode={inputMode}
+              pattern={pattern}
+              maxLength={maxLength}
             />
           </div>
         )}

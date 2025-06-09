@@ -2,44 +2,42 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Mail, Lock, User, Eye, EyeOff, Github, Loader2, CheckCircle2 } from "lucide-react"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { cn } from "@/lib/utils"
-import { useFontStore } from "@/hooks/use-font"
-import { useForm, FormProvider } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { LoginSchema, loginSchema, RegisterSchema, registerSchema } from "@/schemas/auth-schema"
 import { useLoginMutation } from "@/api/mutations/login-mutation"
 import { useRegisterMutation } from "@/api/mutations/register-mutation"
-import { FormInput } from "../reuseable/form-input"
-import { FormCheckbox } from "../reuseable/form-checkbox"
-import { FormRadioGroup } from "../reuseable/form-radio-group"
-import { FormButton } from "../reuseable/form-button"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { useFontStore } from "@/hooks/use-font"
+import { cn } from "@/lib/utils"
+import { LoginSchema, loginSchema, RegisterSchema, registerSchema } from "@/schemas/auth-schema"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { AnimatePresence, motion } from "framer-motion"
+import { CheckCircle2, Github, Loader2, Lock, Mail, User } from "lucide-react"
+import { useEffect, useState } from "react"
+import { FormProvider, useForm } from "react-hook-form"
 import { FormMessages } from "../form/form-messages"
+import { OtpVerificationForm } from "../form/otp-verification-form"
+import { FormButton } from "../reuseable/form-button"
+import { FormCheckbox } from "../reuseable/form-checkbox"
+import { FormInput } from "../reuseable/form-input"
+import { FormRadioGroup } from "../reuseable/form-radio-group"
 import { useAuth } from "./auth-provider"
 
 interface AuthDialogProps {
   isOpen: boolean
   onClose: () => void
-  initialView?: "login" | "register" | "forgot-password"
+  initialView?: "login" | "register" | "forgot-password" | "otp-verification"
 }
 
 export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialogProps) {
   const { selectedFont } = useFontStore()
   const { login } = useAuth()
-  const [view, setView] = useState<"login" | "register" | "forgot-password">(initialView)
+  const [view, setView] = useState<"login" | "register" | "forgot-password" | "otp-verification">(initialView)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false) // For forgot-password, as it's not hooked up to a mutation yet
-  const [email, setEmail] = useState("") // For forgot-password email
+  const [email, setEmail] = useState("") // For forgot-password email and OTP verification
   const [resetEmailSent, setResetEmailSent] = useState(false)
 
   // Login form setup
@@ -49,6 +47,8 @@ export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialo
   })
   const [loginSuccessMessage, setLoginSuccessMessage] = useState<string | null>(null)
   const [loginErrorMessage, setLoginErrorMessage] = useState<string | null>(null)
+
+ 
 
   const handleLoginSubmit = (data: LoginSchema) => {
     setLoginSuccessMessage(null)
@@ -78,19 +78,17 @@ export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialo
   const [registerSuccessMessage, setRegisterSuccessMessage] = useState<string | null>(null)
   const [registerErrorMessage, setRegisterErrorMessage] = useState<string | null>(null)
 
+
+  
   const handleRegisterSubmit = (data: RegisterSchema) => {
     setRegisterSuccessMessage(null)
     setRegisterErrorMessage(null)
     registerMutation(data, {
       onSuccess: (responseData: any) => {
-        setRegisterSuccessMessage("Registration successful!")
+        setRegisterSuccessMessage("Registration successful! Please verify your email with the OTP sent to your inbox.")
+        setEmail(data.email) // Set email for OTP verification form
         registerMethods.reset()
-        setView("login") // Redirect to login after successful registration
-        login({
-          email: responseData?.data?.email || "",
-          name: responseData?.data?.name || "",
-          role: responseData?.data?.role || "",
-        })
+        setView("otp-verification") // Transition to OTP verification view
       },
       onError: (error: any) => {
         setRegisterErrorMessage(error.response?.data?.message || "Registration failed. Please try again.")
@@ -109,6 +107,7 @@ export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialo
       setRegisterErrorMessage(null)
       loginMethods.reset()
       registerMethods.reset()
+      setEmail("") // Clear email on dialog open
     }
   }, [isOpen, initialView, loginMethods, registerMethods])
 
@@ -414,6 +413,25 @@ export function AuthDialog({ isOpen, onClose, initialView = "login" }: AuthDialo
                   </Button>
                 </form>
               )}
+            </motion.div>
+          )}
+
+          {view === "otp-verification" && (
+            <motion.div
+              key="otp-verification"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.2 }}
+              className="p-6"
+            >
+            
+              <OtpVerificationForm
+                email={email}
+                onSuccess={onClose} // Close dialog after successful OTP verification and login
+                onBackToLogin={() => setView("login")}
+                isEnableBackToLogin={true}
+              />
             </motion.div>
           )}
         </AnimatePresence>

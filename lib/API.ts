@@ -5,6 +5,7 @@ export const APIS = {
         logout: "/auth/logout",
         verifyEmail: "/auth/verify-email",
         resetPassword: "/auth/reset-password",
+        verifyOtp: "/auth/verify",
     },
     categories: {
         create: "/categories",       // Create category
@@ -12,6 +13,15 @@ export const APIS = {
         getAll: "/categories",      // Get all categories
         update: (id: number) => `/categories/${id}`,  // Update category
         delete: (id: number) => `/categories/${id}`,  // Delete category
+    },
+    admin: {
+        dashboard: "/api/admin/dashboard",
+    },
+    student: {
+        dashboard: "/api/student/dashboard",
+    },
+    instructor: {
+        dashboard: "/api/instructor/dashboard",
     },
 }
 
